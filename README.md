@@ -9,7 +9,7 @@ var Lenses = require('./src/lenses').expose(global)
   , compose = require('./src/lib/pointfree').compose
   ;
 
-// for demo purposes
+
 var toUpperCase = function(x) { return x.toUpperCase(); };
 
 var user = {name: "Bob", addresses: [{street: '99 Maple', zip: 94004, type: 'home'}, {street: '2302 Powell', zip: 94001, type: 'work'}]}
