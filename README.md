@@ -1,4 +1,5 @@
-lenses
-======
+lenses.js
+=========
 
-Composable kmett style lenses
+Functional lenses that compose and stuff
+
