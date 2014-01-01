@@ -4,10 +4,10 @@ lenses.js
 Functional lenses that compose and stuff
 
 
-var Lenses = require('./src/lenses').expose(global)
-  , assert = require("assert")
-  , compose = require('./src/lib/pointfree').compose
-  ;
+		var Lenses = require('./src/lenses').expose(global)
+		  , assert = require("assert")
+		  , compose = require('./src/lib/pointfree').compose
+		  ;
 
 		// for demo purposes
 		var toUpperCase = function(x) { return x.toUpperCase(); };
