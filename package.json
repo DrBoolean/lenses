@@ -1,0 +1,60 @@
+{
+  "name": "lenses",
+  "version": "0.0.0",
+  "description": "Kmett style lenses in js.",
+  "main": "lenses.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DrBoolean/lenses.git"
+  },
+  "keywords": [
+    "functional",
+    "fantasy",
+    "lens"
+  ],
+  "author": "Loop/Recur",
+  "license": "MIT",
+  "dependencies": {
+    "lodash.curry": "*"
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0",
+    "grunt": "~0.4.1",
+    "grunt-bump": "~0.0.11",
+    "grunt-mocha-test": "~0.8",
+    "claire": "~0.4.1",
+    "grunt-mocha-phantomjs": "~0.3.2",
+    "sinon": "~1.7.3",
+    "requirejs": "~2.1.9",
+    "browserify": "~3.11.1",
+    "grunt-browserify": "~1.3.0"
+  },
+  "testling": {
+    "files": "test/testling.js",
+    "harness": "mocha",
+    "browsers": [
+      "ie/8..latest",
+      "chrome/6.0",
+      "chrome/7.0",
+      "chrome/28..latest",
+      "chrome/30.0",
+      "chrome/31.0",
+      "chrome/canary",
+      "firefox/3.6",
+      "firefox/4",
+      "firefox/22..latest",
+      "firefox/25.0",
+      "safari/latest",
+      "opera/11.0..latest",
+      "iphone/6",
+      "ipad/6",
+      "android-browser/4.2"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/DrBoolean/lenses/issues"
+  }
+}
