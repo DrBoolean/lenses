@@ -6,7 +6,6 @@ var fmap = function(g, f) {
 
 var concat = function(f, g) {
   return function() {
-    console.log("CONCATTTIGN F AND G", f, g);
     return concat( f.apply(this, arguments)
                  , g.apply(this, arguments)
                  );

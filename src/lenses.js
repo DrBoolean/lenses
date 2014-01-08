@@ -83,31 +83,35 @@ var _K = function(x) { return function(y) { return x; } }
 		})
 	;
 
-var Lenses = { makeLenses: makeLenses
-						 , set: set
-						 , view: view
-						 , over: over
-						 , mapped: mapped
-						 , _1 : _1
-						 , _2 : _2
-						 , _3 : _3
-						 , _4 : _4
-						 , _5 : _5
-						 , _6 : _6
-						 , _7 : _7
-						 , _8 : _8
-						 , _9 : _9
-						 }
+var _Lenses = { makeLenses: makeLenses
+						  , set: set
+						  , view: view
+						  , over: over
+						  , mapped: mapped
+						  , _1 : _1
+						  , _2 : _2
+						  , _3 : _3
+						  , _4 : _4
+						  , _5 : _5
+						  , _6 : _6
+						  , _7 : _7
+						  , _8 : _8
+						  , _9 : _9
+						  }
 
-Lenses.expose = function(env) {
+_Lenses.expose = function(env) {
   var f;
-  for (f in Lenses) {
-    if (f !== 'expose' && Lenses.hasOwnProperty(f)) {
-      env[f] = Lenses[f];
+  for (f in _Lenses) {
+    if (f !== 'expose' && _Lenses.hasOwnProperty(f)) {
+      env[f] = _Lenses[f];
     }
   }
+  return _Lenses;
 }
 
-module.exports = Lenses;
+module.exports = _Lenses;
+if(typeof window == "object") {
+	Lenses = _Lenses;
+}
 
 // next up folds and traverses...

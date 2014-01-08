@@ -99,6 +99,7 @@ var expose = function(env) {
       env[f] = Pointy[f];
     }
   }
+  return Pointy;
 }
 
 Pointy.id = id;

@@ -687,32 +687,36 @@ var _K = function(x) { return function(y) { return x; } }
 		})
 	;
 
-var Lenses = { makeLenses: makeLenses
-						 , set: set
-						 , view: view
-						 , over: over
-						 , mapped: mapped
-						 , _1 : _1
-						 , _2 : _2
-						 , _3 : _3
-						 , _4 : _4
-						 , _5 : _5
-						 , _6 : _6
-						 , _7 : _7
-						 , _8 : _8
-						 , _9 : _9
-						 }
+var _Lenses = { makeLenses: makeLenses
+						  , set: set
+						  , view: view
+						  , over: over
+						  , mapped: mapped
+						  , _1 : _1
+						  , _2 : _2
+						  , _3 : _3
+						  , _4 : _4
+						  , _5 : _5
+						  , _6 : _6
+						  , _7 : _7
+						  , _8 : _8
+						  , _9 : _9
+						  }
 
-Lenses.expose = function(env) {
+_Lenses.expose = function(env) {
   var f;
-  for (f in Lenses) {
-    if (f !== 'expose' && Lenses.hasOwnProperty(f)) {
-      env[f] = Lenses[f];
+  for (f in _Lenses) {
+    if (f !== 'expose' && _Lenses.hasOwnProperty(f)) {
+      env[f] = _Lenses[f];
     }
   }
+  return _Lenses;
 }
 
-module.exports = Lenses;
+module.exports = _Lenses;
+if(typeof window == "object") {
+	Lenses = _Lenses;
+}
 
 // next up folds and traverses...
 
@@ -785,7 +789,6 @@ var fmap = function(g, f) {
 
 var concat = function(f, g) {
   return function() {
-    console.log("CONCATTTIGN F AND G", f, g);
     return concat( f.apply(this, arguments)
                  , g.apply(this, arguments)
                  );
@@ -954,6 +957,7 @@ var expose = function(env) {
       env[f] = Pointy[f];
     }
   }
+  return Pointy;
 }
 
 Pointy.id = id;
@@ -1015,44 +1019,4 @@ var subClass = function(superclass, constructr) {
 }
 exports.subClass = subClass;
 
-var toArray = function(x) {
-  return Array.prototype.slice.call(x);
-}
-
-var curry = function (fn /* variadic number of args */) {
-  var args = Array.prototype.slice.call(arguments, 1);
-  var f = function () {
-    return fn.apply(this, args.concat(toArray(arguments)));
-  };
-  return f;
-};
-
-var autoCurry = function (fn, numArgs) {
-  numArgs = numArgs || fn.length;
-  var f = function () {
-    if (arguments.length < numArgs) {
-      return numArgs - arguments.length > 0 ?
-        autoCurry(curry.apply(this, [fn].concat(toArray(arguments))),
-            numArgs - arguments.length) :
-        curry.apply(this, [fn].concat(toArray(arguments)));
-    }
-    else {
-      return fn.apply(this, arguments);
-    }
-  };
-  f.toString = function(){ return fn.toString(); };
-  f.curried = true;
-  f.fn = fn;
-  f.arity = fn.length;
-  return f;
-};
-exports.autoCurry = autoCurry;
-Function.prototype.autoCurry = function(n) {
-  return autoCurry(this, n);
-}
-
-
-var K = function(x){return function(){return x;};};
-exports.K = K;var I = function(x){return x;};
-exports.I = I;
 },{}]},{},[23])
