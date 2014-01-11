@@ -1,6 +1,6 @@
 var Lenses = require('../src/lenses').expose(global)
   , assert = require("assert")
-  , compose = require('../src/lib/pointfree').compose
+  , compose = require('pointfree-fantasy').compose
   , curry = require('lodash.curry')
   ;
 
@@ -39,6 +39,21 @@ describe('Lenses', function() {
 			assert.deepEqual(set(_1, 10, [13,12,9]), [10,12,9]);
 		});
 	});
+
+	describe("String Lens", function() {
+		it('alters the second element', function() {
+			assert.deepEqual(over(_2, add('im'), 'the string'), 'timhe string')
+		});
+
+		it('views the third element', function() {
+			assert.deepEqual(view(_3, 'the'), 'e')
+		});
+
+		it('sets the first element', function() {
+			assert.deepEqual(set(_1, 'b', 'sync'), 'bync');
+		});
+	});
+
 
 	it('maps like fmap', function() {
 		var f = over(compose(mapped, mapped, mapped), add(1))

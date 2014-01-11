@@ -1,6 +1,6 @@
 {
   "name": "lenses",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Kmett style lenses in js.",
   "main": "index.js",
   "scripts": {

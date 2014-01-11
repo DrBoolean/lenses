@@ -27,11 +27,7 @@ var _K = function(x) { return function(y) { return x; } }
 
 //+ _insertStr :: Int -> String -> String -> String
   , _insertStr = function (idx, rep, str) {
-			if (idx > 0) {
-		  	return str.substring(0, idx) + rep + str.substring(idx, str.length);
-		  } else {
-		  	return rep + str;
-		  }
+  	  return str.substr(0,idx) + rep + str.substr(idx+1);
 		}
 
 //+ arrayLens :: Int -> Lens
