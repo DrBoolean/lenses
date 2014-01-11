@@ -25,11 +25,30 @@ var _K = function(x) { return function(y) { return x; } }
       return destination;
     }
 
+//+ _insertStr :: Int -> String -> String -> String
+  , _insertStr = function (idx, rep, str) {
+			if (idx > 0) {
+		  	return str.substring(0, idx) + rep + str.substring(idx, str.length);
+		  } else {
+		  	return rep + str;
+		  }
+		}
+
+//+ arrayLens :: Int -> Lens
+  , arrayLens = function(n, f, xs) {
+			var ys = xs.slice(0);
+			return fmap(function(x) { ys.splice(n, 1, x); return ys; }, f(xs[n]));
+  	}
+
+//+ stringLens :: Int -> Lens
+  , stringLens = function(n, f, xs) {
+			return fmap(function(x) { return _insertStr(n, x, xs); }, f(xs[n]));
+  	}
+
 //+ _makeNLens :: Int -> Lens
 	, _makeNLens = function(n) {
 			return curry(function(f, xs) {
-				var ys = xs.slice(0);
-				return fmap(function(x) { ys.splice(n, 1, x); return ys; }, f(xs[n]));
+				return (typeof xs === 'string') ? stringLens(n, f, xs) : arrayLens(n, f, xs);
 			});
 		}
 
