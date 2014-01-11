@@ -1,10 +1,10 @@
-var Id = require('./lib/identity')
+var Id = require('pointfree-fantasy/instances/identity')
 	, Identity = Id.Identity
 	, runIdentity = Id.runIdentity
-	, Constant = require('./lib/const')
+	, Constant = require('pointfree-fantasy/instances/const')
 	, Const = Constant.Const
 	, getConst = Constant.getConst
-	, Pf = require('./lib/pointfree')
+	, Pf = require('pointfree-fantasy')
 	, compose = Pf.compose
 	, fmap = Pf.fmap
 	, curry = require('lodash.curry')
