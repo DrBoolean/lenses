@@ -27,3 +27,14 @@ view(L.name, user) // 'Bob'
 
 set(L.name, 'Kelly', user) // {name: "Kelly", addresses: [{street: '99 Maple', zip: 94004, type: 'home'}, {street: '2302 Powell', zip: 94001, type: 'work'}]}
 ```
+
+
+ROADMAP:
+
+- remove dependency on identity and const from pointfree and use fantasy ones
+- update the browser file for amd as well
+- add traverses and folds
+- more combinators
+- prisms
+- this list is getting long...
+
