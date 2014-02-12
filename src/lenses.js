@@ -64,18 +64,10 @@ var _K = function(x) { return function(y) { return x; } }
 			return keys.reduce(function(acc, key) {
 				acc[key] = _makeKeyLens(key);
 				return acc;
-			}, {});
+			}, {
+				_num : _makeNLens
+			});
 		}
-
-	, _1 = _makeNLens(0)
-	, _2 = _makeNLens(1)
-	, _3 = _makeNLens(2)
-	, _4 = _makeNLens(3)
-	, _5 = _makeNLens(4)
-	, _6 = _makeNLens(5)
-	, _7 = _makeNLens(6)
-	, _8 = _makeNLens(7)
-	, _9 = _makeNLens(8)
 
 //+ set :: (a -> Identity	b) -> s -> Identity t -> b -> s -> t
 	, set = curry(function(lens, val, x) {
@@ -83,7 +75,7 @@ var _K = function(x) { return function(y) { return x; } }
 		})
 
 //+ view :: (a -> Const	r) -> s -> Const r -> s -> a
-	,	view = curry(function(lens, x) {
+	, view = curry(function(lens, x) {
 			return compose(getConst, lens(Const))(x);
 		})
 
@@ -93,7 +85,7 @@ var _K = function(x) { return function(y) { return x; } }
 		})
 
 //+ mapped :: (a -> Identity b) -> s -> Identity t
-	,	mapped = curry(function(f, x) {
+	, mapped = curry(function(f, x) {
 		  return Identity(fmap(compose(runIdentity, f), x));
 		})
 	;
@@ -103,15 +95,6 @@ var _Lenses = { makeLenses: makeLenses
 						  , view: view
 						  , over: over
 						  , mapped: mapped
-						  , _1 : _1
-						  , _2 : _2
-						  , _3 : _3
-						  , _4 : _4
-						  , _5 : _5
-						  , _6 : _6
-						  , _7 : _7
-						  , _8 : _8
-						  , _9 : _9
 						  }
 
 _Lenses.expose = function(env) {

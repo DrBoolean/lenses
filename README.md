@@ -18,7 +18,7 @@ var user = {name: "Bob", addresses: [{street: '99 Maple', zip: 94004, type: 'hom
 var L = makeLenses(['name', 'addresses', 'street']);
 
 // compose the lenses
-var secondAddressesStreet = compose(L.addresses, _2, L.street)
+var secondAddressesStreet = compose(L.addresses, L._num(2), L.street)
 
 // mess with the user
 over(secondAddressesStreet, toUpperCase, user) // { name: 'Bob', addresses: [ { street: '99 Maple', zip: 94004, type: 'home' }, { street: '2302 POWELL', zip: 94001, type: 'work' } ] }

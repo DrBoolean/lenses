@@ -54,6 +54,14 @@ describe('Lenses', function() {
 		});
 	});
 
+	describe("Numbered Lens", function() {
+		it('allows access to numbered elements', function () {
+			var state = {characters: [{level: 20}, {level: 15}, {level: 2}]}
+				, L = makeLenses(['characters', 'level'])
+				;
+			assert.equal(view(compose(L.characters, L._num(2), L.level), state), 2);
+		})
+	});
 
 	it('maps like fmap', function() {
 		var f = over(compose(mapped, mapped, mapped), add(1))
