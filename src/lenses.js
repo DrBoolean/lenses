@@ -17,7 +17,7 @@ var _K = function(x) { return function(y) { return x; } }
   , _clone = function(destination, source) {
       for (var property in source) {
         if (typeof source[property] === "object" && source[property] !== null && destination[property]) { 
-          clone(destination[property], source[property]);
+          _clone(destination[property], source[property]);
         } else {
           destination[property] = source[property];
         }
