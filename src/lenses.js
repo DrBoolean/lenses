@@ -10,9 +10,15 @@ var Id = require('pointfree-fantasy/instances/identity')
 	, curry = require('lodash.curry')
 	;
 
+/* The K Combinator: given x, return a function of one argument that will always return x
+*/
 //+ _K :: a -> (_ -> a)
 var _K = function(x) { return function(y) { return x; } }
 
+/* Deep-copy properties from source to destination, replacing any values found in identical paths,
+/* and leaving untouched any values found at paths that don't exist in the source object.
+/* This function mutates the destination object!
+*/
 	// stolen from http://stackoverflow.com/questions/11299284/javascript-deep-copying-object
   , _clone = function(destination, source) {
       for (var property in source) {
@@ -25,6 +31,8 @@ var _K = function(x) { return function(y) { return x; } }
       return destination;
     }
 
+/* Return a string in which the idx'th character of str has been replaced by rep.
+*/
 //+ _insertStr :: Int -> String -> String -> String
   , _insertStr = function (idx, rep, str) {
   	  return str.substr(0,idx) + rep + str.substr(idx+1);
