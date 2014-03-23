@@ -91,6 +91,11 @@ var _K = function(x) { return function(y) { return x; } }
 			});
 		}
 
+/* Return an object (suppose it's called obj) in which each property obj.key
+/* (where "key" is a string from the passed-in array) is a lens for that string key,
+/* and the property obj._num is a function that takes an integer and returns
+/* a lens for that integer key.
+*/
 //+ makeLenses :: [String] -> {String: Lens}
 	, makeLenses = function(keys) {
 			return keys.reduce(function(acc, key) {
