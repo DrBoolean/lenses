@@ -30,15 +30,15 @@ describe('Lenses', function() {
 		var L = makeLenses([])
 
 		it('alters the second element', function() {
-			assert.deepEqual(over(L._num(1), add(1), [1,2,3]), [1,3,3])
+			assert.deepEqual(over(L[1], add(1), [1,2,3]), [1,3,3])
 		});
 
 		it('views the third element', function() {
-			assert.deepEqual(view(L._num(2), [13,12,9]), 9)
+			assert.deepEqual(view(L[2], [13,12,9]), 9)
 		});
 
 		it('sets the first element', function() {
-			assert.deepEqual(set(L._num(0), 10, [13,12,9]), [10,12,9]);
+			assert.deepEqual(set(L[0], 10, [13,12,9]), [10,12,9]);
 		});
 	});
 
@@ -46,15 +46,15 @@ describe('Lenses', function() {
 		var L = makeLenses([])
 
 		it('alters the second element', function() {
-			assert.deepEqual(over(L._num(1), add('im'), 'the string'), 'timhe string')
+			assert.deepEqual(over(L[1], add('im'), 'the string'), 'timhe string')
 		});
 
 		it('views the third element', function() {
-			assert.deepEqual(view(L._num(2), 'the'), 'e')
+			assert.deepEqual(view(L[2], 'the'), 'e')
 		});
 
 		it('sets the first element', function() {
-			assert.deepEqual(set(L._num(0), 'b', 'sync'), 'bync');
+			assert.deepEqual(set(L[0], 'b', 'sync'), 'bync');
 		});
 	});
 
@@ -63,7 +63,7 @@ describe('Lenses', function() {
 			var state = {characters: [{level: 20}, {level: 15}, {level: 2}]}
 				, L = makeLenses(['characters', 'level'])
 				;
-			assert.equal(view(compose(L.characters, L._num(2), L.level), state), 2);
+			assert.equal(view(compose(L.characters, L[2], L.level), state), 2);
 		})
 	});
 
