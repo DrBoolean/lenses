@@ -10,7 +10,8 @@ var Id = require('pointfree-fantasy/instances/identity')
 	, curry = require('lodash.curry')
 	;
 
-/* The K Combinator: given x, return a function of one argument that will always return x
+/* The K Combinator: given x, return a function of one argument that will always return x.
+/* We will use this to define set in terms of over.
 */
 //+ _K :: a -> (_ -> a)
 var _K = function(x) { return function(y) { return x; } }
@@ -20,10 +21,10 @@ var _K = function(x) { return function(y) { return x; } }
 /* This function mutates the destination object!
 */
 	// stolen from http://stackoverflow.com/questions/11299284/javascript-deep-copying-object
-  , _clone = function(destination, source) {
+  , _merge = function(destination, source) {
       for (var property in source) {
-        if (typeof source[property] === "object" && source[property] !== null && destination[property]) { 
-          _clone(destination[property], source[property]);
+        if (typeof source[property] === "object" && source[property] !== null && destination[property]) {
+          _merge(destination[property], source[property]);
         } else {
           destination[property] = source[property];
         }
@@ -31,49 +32,77 @@ var _K = function(x) { return function(y) { return x; } }
       return destination;
     }
 
-/* Return a string in which the idx'th character of str has been replaced by rep.
+  , clone = function(obj) {
+      return _merge({}, obj);
+    }
+
+/* Return an array in which the key'th element of xs has been replaced by rep.
 */
-//+ _insertStr :: Int -> String -> String -> String
-  , _insertStr = function (idx, rep, str) {
-  	  return str.substr(0,idx) + rep + str.substr(idx+1);
+//+ _arraySplice :: Int -> Object -> Array -> Array
+  , _arraySplice = function(key, rep, xs) {
+      var ys = xs.slice(0);
+      ys.splice(key, 1, rep);
+      return ys;
+    }
+
+/* Return a string in which the key'th character of str has been replaced by rep.
+/* (No check is done to ensure that rep is only a single character.)
+*/
+//+ _stringSplice :: Int -> String -> String -> String
+  , _stringSplice = function(key, rep, str) {
+  	  return str.substr(0,key) + rep + str.substr(key+1);
 		}
 
+/* Return an object in which the property indexed by key in obj has been replaced by rep.
+*/
+//+ _objectSplice :: String -> Object -> Object -> Object
+  , _objectSplice = function(key, rep, obj) {
+      var new_obj = clone(obj);
+      new_obj[key] = rep;
+      return new_obj;
+    }
+
 //+ arrayLens :: Int -> Lens
-  , arrayLens = function(n, f, xs) {
-			var ys = xs.slice(0);
-			return fmap(function(x) { ys.splice(n, 1, x); return ys; }, f(xs[n]));
+  , arrayLens = function(key, f, xs) {
+			return fmap(function(rep) { return _arraySplice(key, rep, xs); }, f(xs[key]));
   	}
 
 //+ stringLens :: Int -> Lens
-  , stringLens = function(n, f, xs) {
-			return fmap(function(x) { return _insertStr(n, x, xs); }, f(xs[n]));
+  , stringLens = function(key, f, xs) {
+			return fmap(function(rep) { return _stringSplice(key, rep, xs); }, f(xs[key]));
   	}
 
-//+ _makeNLens :: Int -> Lens
-	, _makeNLens = function(n) {
+//+ objectLens :: String -> Lens
+  , objectLens = function(key, f, xs) {
+			return fmap(function(rep) { return _objectSplice(key, rep, xs); }, f(xs[key]));
+  	}
+
+//+ _intIndexedLens :: Int -> Lens
+	, _intIndexedLens = function(n) {
 			return curry(function(f, xs) {
 				return (typeof xs === 'string') ? stringLens(n, f, xs) : arrayLens(n, f, xs);
 			});
 		}
 
-//+ _makeKeyLens :: String -> Lens
-	, _makeKeyLens = function(key) {
+//+ _stringIndexedLens :: String -> Lens
+	, _stringIndexedLens = function(key) {
 			return curry(function(f, x) {
-				return fmap(function(val) {
-					var new_obj = _clone({}, x);
-					new_obj[key] = val;
-					return new_obj;
-				}, f(x[key]));
+        return objectLens(key, f, x);
 			});
 		}
 
+/* Return an object (suppose it's called obj) in which each property obj.key
+/* (where "key" is a string from the passed-in array) is a lens for that string key,
+/* and the property obj._num is a function that takes an integer and returns
+/* a lens for that integer key.
+*/
 //+ makeLenses :: [String] -> {String: Lens}
 	, makeLenses = function(keys) {
 			return keys.reduce(function(acc, key) {
-				acc[key] = _makeKeyLens(key);
+				acc[key] = _stringIndexedLens(key);
 				return acc;
 			}, {
-				_num : _makeNLens
+				_num : _intIndexedLens
 			});
 		}
 
