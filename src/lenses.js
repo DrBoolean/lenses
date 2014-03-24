@@ -91,19 +91,24 @@ var _K = function(x) { return function(y) { return x; } }
 			});
 		}
 
+  , _IntLenses = (function() {
+      var list = [];
+      for (var i = 0; i < 1000; i++) {
+        list[i] = _intIndexedLens(i);
+      }
+      return list;
+    })()
+
 /* Return an object (suppose it's called obj) in which each property obj.key
-/* (where "key" is a string from the passed-in array) is a lens for that string key,
-/* and the property obj._num is a function that takes an integer and returns
-/* a lens for that integer key.
+/* where "key" is a string from the passed-in array, or obj[key] where key is an integer,
+/* is a lens for that key.
 */
 //+ makeLenses :: [String] -> {String: Lens}
 	, makeLenses = function(keys) {
 			return keys.reduce(function(acc, key) {
 				acc[key] = _stringIndexedLens(key);
 				return acc;
-			}, {
-				_num : _intIndexedLens
-			});
+			}, _IntLenses);
 		}
 
 //+ set :: (a -> Identity	b) -> s -> Identity t -> b -> s -> t
