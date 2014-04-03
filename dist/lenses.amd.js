@@ -1,4 +1,7 @@
+define([], function() {
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = require('./src/lenses');
+},{"./src/lenses":31}],2:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -44,7 +47,7 @@ function curry(func, arity) {
 
 module.exports = curry;
 
-},{"lodash._createwrapper":2}],2:[function(require,module,exports){
+},{"lodash._createwrapper":3}],3:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -152,7 +155,7 @@ function createWrapper(func, bitmask, partialArgs, partialRightArgs, thisArg, ar
 
 module.exports = createWrapper;
 
-},{"lodash._basebind":3,"lodash._basecreatewrapper":12,"lodash._slice":21,"lodash.isfunction":22}],3:[function(require,module,exports){
+},{"lodash._basebind":4,"lodash._basecreatewrapper":13,"lodash._slice":22,"lodash.isfunction":23}],4:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -216,7 +219,7 @@ function baseBind(bindData) {
 
 module.exports = baseBind;
 
-},{"lodash._basecreate":4,"lodash._setbinddata":7,"lodash._slice":21,"lodash.isobject":10}],4:[function(require,module,exports){
+},{"lodash._basecreate":5,"lodash._setbinddata":8,"lodash._slice":22,"lodash.isobject":11}],5:[function(require,module,exports){
 var global=typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {};/**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -260,7 +263,7 @@ if (!nativeCreate) {
 
 module.exports = baseCreate;
 
-},{"lodash._isnative":5,"lodash.isobject":10,"lodash.noop":6}],5:[function(require,module,exports){
+},{"lodash._isnative":6,"lodash.isobject":11,"lodash.noop":7}],6:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -296,7 +299,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -324,7 +327,7 @@ function noop() {
 
 module.exports = noop;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -369,11 +372,11 @@ var setBindData = !defineProperty ? noop : function(func, value) {
 
 module.exports = setBindData;
 
-},{"lodash._isnative":8,"lodash.noop":9}],8:[function(require,module,exports){
-module.exports=require(5)
-},{}],9:[function(require,module,exports){
+},{"lodash._isnative":9,"lodash.noop":10}],9:[function(require,module,exports){
 module.exports=require(6)
 },{}],10:[function(require,module,exports){
+module.exports=require(7)
+},{}],11:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -414,7 +417,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{"lodash._objecttypes":11}],11:[function(require,module,exports){
+},{"lodash._objecttypes":12}],12:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -436,7 +439,7 @@ var objectTypes = {
 
 module.exports = objectTypes;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -516,23 +519,23 @@ function baseCreateWrapper(bindData) {
 
 module.exports = baseCreateWrapper;
 
-},{"lodash._basecreate":13,"lodash._setbinddata":16,"lodash._slice":21,"lodash.isobject":19}],13:[function(require,module,exports){
-arguments[4][4][0].apply(exports,arguments)
-},{"lodash._isnative":14,"lodash.isobject":19,"lodash.noop":15}],14:[function(require,module,exports){
-module.exports=require(5)
-},{}],15:[function(require,module,exports){
+},{"lodash._basecreate":14,"lodash._setbinddata":17,"lodash._slice":22,"lodash.isobject":20}],14:[function(require,module,exports){
+arguments[4][5][0].apply(exports,arguments)
+},{"lodash._isnative":15,"lodash.isobject":20,"lodash.noop":16}],15:[function(require,module,exports){
 module.exports=require(6)
 },{}],16:[function(require,module,exports){
 module.exports=require(7)
-},{"lodash._isnative":17,"lodash.noop":18}],17:[function(require,module,exports){
-module.exports=require(5)
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
+module.exports=require(8)
+},{"lodash._isnative":18,"lodash.noop":19}],18:[function(require,module,exports){
 module.exports=require(6)
 },{}],19:[function(require,module,exports){
-module.exports=require(10)
-},{"lodash._objecttypes":20}],20:[function(require,module,exports){
+module.exports=require(7)
+},{}],20:[function(require,module,exports){
 module.exports=require(11)
-},{}],21:[function(require,module,exports){
+},{"lodash._objecttypes":21}],21:[function(require,module,exports){
+module.exports=require(12)
+},{}],22:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -572,7 +575,7 @@ function slice(array, start, end) {
 
 module.exports = slice;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /**
  * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize modern exports="npm" -o ./npm/`
@@ -601,165 +604,102 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{}],23:[function(require,module,exports){
-var Id = require('./lib/identity')
-	, Identity = Id.Identity
-	, runIdentity = Id.runIdentity
-	, Constant = require('./lib/const')
-	, Const = Constant.Const
-	, getConst = Constant.getConst
-	, Pf = require('./lib/pointfree')
-	, compose = Pf.compose
-	, fmap = Pf.fmap
-	, curry = require('lodash.curry')
-	;
-
-//+ _K :: a -> (_ -> a)
-var _K = function(x) { return function(y) { return x; } }
-
-	// stolen from http://stackoverflow.com/questions/11299284/javascript-deep-copying-object
-  , _clone = function(destination, source) {
-      for (var property in source) {
-        if (typeof source[property] === "object" && source[property] !== null && destination[property]) { 
-          clone(destination[property], source[property]);
-        } else {
-          destination[property] = source[property];
-        }
-      }
-      return destination;
-    }
-
-//+ _makeNLens :: Int -> Lens
-	, _makeNLens = function(n) {
-			return curry(function(f, xs) {
-				var ys = xs.slice(0);
-				return fmap(function(x) { ys.splice(n, 1, x); return ys; }, f(xs[n]));
-			});
-		}
-
-//+ _makeKeyLens :: String -> Lens
-	, _makeKeyLens = function(key) {
-			return curry(function(f, x) {
-				return fmap(function(val) {
-					var new_obj = _clone({}, x);
-					new_obj[key] = val;
-					return new_obj;
-				}, f(x[key]));
-			});
-		}
-
-//+ makeLenses :: [String] -> {String: Lens}
-	, makeLenses = function(keys) {
-			return keys.reduce(function(acc, key) {
-				acc[key] = _makeKeyLens(key);
-				return acc;
-			}, {});
-		}
-
-	, _1 = _makeNLens(0)
-	, _2 = _makeNLens(1)
-	, _3 = _makeNLens(2)
-	, _4 = _makeNLens(3)
-	, _5 = _makeNLens(4)
-	, _6 = _makeNLens(5)
-	, _7 = _makeNLens(6)
-	, _8 = _makeNLens(7)
-	, _9 = _makeNLens(8)
-
-//+ set :: (a -> Identity	b) -> s -> Identity t -> b -> s -> t
-	, set = curry(function(lens, val, x) {
-			return over(lens, _K(val), x);
-		})
-
-//+ view :: (a -> Const	r) -> s -> Const r -> s -> a
-	,	view = curry(function(lens, x) {
-			return compose(getConst, lens(Const))(x);
-		})
-
-//+ over :: (a -> Identity b) -> s -> Identity t -> b -> s -> t
-	, over = curry(function(lens, f, x) {
-			return compose(runIdentity, lens(compose(Identity,f)))(x);
-		})
-
-//+ mapped :: (a -> Identity b) -> s -> Identity t
-	,	mapped = curry(function(f, x) {
-		  return Identity(fmap(compose(runIdentity, f), x));
-		})
-	;
-
-var _Lenses = { makeLenses: makeLenses
-						  , set: set
-						  , view: view
-						  , over: over
-						  , mapped: mapped
-						  , _1 : _1
-						  , _2 : _2
-						  , _3 : _3
-						  , _4 : _4
-						  , _5 : _5
-						  , _6 : _6
-						  , _7 : _7
-						  , _8 : _8
-						  , _9 : _9
-						  }
-
-_Lenses.expose = function(env) {
-  var f;
-  for (f in _Lenses) {
-    if (f !== 'expose' && _Lenses.hasOwnProperty(f)) {
-      env[f] = _Lenses[f];
-    }
-  }
-  return _Lenses;
-}
-
-module.exports = _Lenses;
-if(typeof window == "object") {
-	Lenses = _Lenses;
-}
-
-// next up folds and traverses...
-
-},{"./lib/const":25,"./lib/identity":27,"./lib/pointfree":28,"lodash.curry":1}],24:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
+var curry = require('lodash.curry');
 var _flatten = function(xs) {
   return xs.reduce(function(a,b){return a.concat(b);}, []);
 };
 
-var fmap = function(f, xs) {
+var _fmap = function(f) {
+  var xs = this;
   return xs.map(function(x) { return f(x); }); //avoid index
 };
 
-var concat = function(xs,ys) { return xs.concat(ys); };
+Object.defineProperty(Array.prototype, 'fmap',{
+    value: _fmap,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
 
-var empty = function() { return []; };
+var _empty = function() { return []; };
 
-var chain = function(xs, f) { return _flatten(xs.map(f)); };
+Object.defineProperty(Array.prototype, 'empty',{
+    value: _empty,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
 
-var of = function(x) { return [x]; };
-var ap = function(a1, a2) {
+var _chain = function(f) { return _flatten(this.fmap(f)); };
+
+Object.defineProperty(Array.prototype, 'chain',{
+    value: _chain,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _of = function(x) { return [x]; };
+
+Object.defineProperty(Array.prototype, 'of',{
+    value: _of,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _ap = function(a2) {
+  var a1 = this;
   return _flatten(a1.map(function(f){
     return a2.map(function(a){ return f(a); })
   }));
 };
 
+Object.defineProperty(Array.prototype, 'ap',{
+    value: _ap,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
 
-module.exports = { fmap: fmap
-                 , of: of
-                 , ap: ap
-                 , concat: concat
-                 , empty: empty
-                 , chain: chain
-                 }
+var _traverse = function(f) {
+  var xs = this;
+  var cons_f = function(ys, x){
+    var z = f(x).map(curry(function(x,y){ return y.concat(x); }));
+    ys = ys || z.of([]);
+    return z.ap(ys);
+  }
+  return xs.reduce(cons_f, null);
+};
 
-},{}],25:[function(require,module,exports){
-var Constructor = require('./util').Constructor;
+Object.defineProperty(Array.prototype, 'traverse',{
+    value: _traverse,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _foldl = function(f, acc) {
+  return this.reduce(f, acc);
+}
+
+Object.defineProperty(Array.prototype, 'foldl',{
+    value: _foldl,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+
+},{"lodash.curry":2}],25:[function(require,module,exports){
+var Constructor = require('../util').Constructor;
 
 var Const = Constructor(function(val) {
 	this.val = val;
-	this.getConst = function() { return this.val; };
 });
 
-var getConst = function(c) { return c.getConst(); };
+var getConst = function(c) { return c.val; };
 
 Const.prototype.map = function(f) {
 	return Const(this.val);
@@ -780,48 +720,85 @@ Const.prototype.ap = function(c2) {
 
 module.exports = {Const: Const, getConst: getConst}
 
-},{"./util":30}],26:[function(require,module,exports){
+},{"../util":30}],26:[function(require,module,exports){
 var _K = function(x) { return function(y) { return x; } };
 
-var fmap = function(g, f) {
+var _fmap = function(g) {
+  var f = this;
   return function(x) { return g(f(x)) };
 };
 
-var concat = function(f, g) {
+Object.defineProperty(Function.prototype, 'fmap',{
+    value: _fmap,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _concat = function(g) {
+  var f = this;
   return function() {
-    return concat( f.apply(this, arguments)
-                 , g.apply(this, arguments)
-                 );
+    return f.apply(this, arguments).concat(g.apply(this, arguments))
   }
 };
 
-var empty = function() {
-  return _K({ concat: function(f, g) { return concat(empty(g), g); } });
+Object.defineProperty(Function.prototype, 'concat',{
+    value: _concat,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _empty = function() {
+  return _K({ concat: function(g) { return g.empty().concat(g); } });
 };
 
-var chain = function(f, g) {
+Object.defineProperty(Function.prototype, 'empty',{
+    value: _empty,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _chain = function(g) {
+  var f = this;
   return function(x) {
     return g(f(x), x);
   };
 };
 
-var of = _K;
-var ap = function(f, g) {
+Object.defineProperty(Function.prototype, 'chain',{
+    value: _chain,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _of = _K;
+
+Object.defineProperty(Function.prototype, 'of',{
+    value: _of,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+var _ap = function(g) {
+  var f = this;
   return function(x) {
-    return f(x, g(x));
+    return f(x)(g(x));
   }
 };
 
-module.exports = { fmap: fmap
-                 , of: of
-                 , ap: ap
-                 , concat: concat
-                 , empty: empty
-                 , chain: chain
-                 }
+Object.defineProperty(Function.prototype, 'ap',{
+    value: _ap,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
 
 },{}],27:[function(require,module,exports){
-var Constructor = require('./util').Constructor;
+var Constructor = require('../util').Constructor;
 
 var Id = Constructor(function(a) {
 	this.value = a;
@@ -855,22 +832,23 @@ Id.prototype.of = function(a) {
 
 module.exports = {Identity: Id, runIdentity: runIdentity};
 
-},{"./util":30}],28:[function(require,module,exports){
+},{"../util":30}],28:[function(require,module,exports){
+var _empty = function() { return ""; };
+
+Object.defineProperty(String.prototype, 'empty',{
+    value: _empty,
+    writable: true,
+    configurable: true,
+    enumerable: false
+});
+
+},{}],29:[function(require,module,exports){
 var curry = require('lodash.curry');
 
-var BUILT_INS = { 'array': require('./array')
-                , 'function': require('./function')
-                , 'string': require('./string')
+var BUILT_INS = { 'array': require('./instances/array')
+                , 'function': require('./instances/function')
+                , 'string': require('./instances/string')
                 }
-
-var _getNamedType = function(x) {
-  return Object.prototype.toString.call( x ).match(/\S+(.*?)]/)[1].substr(1).toLowerCase();
-};
-
-var _getInstance = function(fn_name, x) {
-  var t = _getNamedType(x);
-  return BUILT_INS[t] && BUILT_INS[t][fn_name];
-};
 
 var _groupsOf = curry(function(n, xs) {
   if(!xs.length) return [];
@@ -878,6 +856,8 @@ var _groupsOf = curry(function(n, xs) {
 });
 
 var _compose = curry(function(f,g,x) { return f(g(x)) });
+
+var I = function(x){ return x; }
 
 // f . g . h == compose(f, g, h)
 var toAssociativeCommaInfix = function(fn) {
@@ -901,33 +881,27 @@ var Pointy = {};
 var id = function(x) { return x; }
 
 var fmap = curry(function(f, u) {
-  var builtIn = _getInstance('fmap', u);
-  return builtIn ? builtIn(f, u) : (u.fmap && u.fmap(f)) || u.map(f);
+  return (u.fmap && u.fmap(f)) || u.map(f);
 });
 
 var of = curry(function(f, a) {
-  var builtIn = _getInstance('of', a);
-  return builtIn ? builtIn(f, a) : a.of(f);
+  return a.of(f);
 });
 
 var ap = curry(function(a1, a2) {
-  var builtIn = _getInstance('ap', a1)
-  return builtIn ? builtIn(a1, a2) : a1.ap(a2);
+  return a1.ap(a2);
 });
 
 var liftA2 = curry(function(f, x, y) {
-	return fmap(f, x).ap(y);
+  return fmap(f,x).ap(y);
 });
 
-// this is 'purely' for setting up pure(f).ap || ap(pure(f)) to stay type generic
-var pure = function(f) {
-  f.ap = fmap(f);
-  return f;
-};
+var liftA3 = curry(function(f, x, y, z) {
+  return fmap(f, x).ap(y).ap(z);
+});
 
 var chain = curry(function(mv, f) {
-  var builtIn = _getInstance('chain', mv);
-  return builtIn ? builtIn(mv, f) : mv.chain(f);
+  return mv.chain(f);
 });
 
 var mjoin = function(mmv) {
@@ -935,19 +909,46 @@ var mjoin = function(mmv) {
 };
 
 var concat = curry(function(x, y) {
-  var builtIn = _getInstance('concat', x);
-  return builtIn ? builtIn(x,y) : x.concat(y);
+  return x.concat(y);
 });
 
 var empty = function(x) {
-  var builtIn = _getInstance('empty', x);
-  return builtIn ? builtIn(x) : x.empty();
+  return x.empty();
+};
+
+var mappend = function(x,y) {
+  console.log('x', x, 'y', y);
+  return concat(x,y)
 };
 
 var mconcat = function(xs) {
 	if(!xs[0]) return xs;
   var e = empty(xs[0]);
   return xs.reduce(mappend, e);
+};
+
+var sequenceA = curry(function(fctr) {
+  return fctr.traverse(id);
+});
+
+var traverse = curry(function(f, fctr) {
+  return compose(sequenceA, fmap(f))(fctr);
+});
+
+var foldMap = curry(function(f, fldable) {
+  return fldable.foldl(function(acc, x) {
+    var r = f(x)
+    acc = acc || r.empty();
+    return acc.concat(r);
+  })
+});
+
+var fold = foldMap(I)
+
+var toList = function(x) {
+  return x.foldl(function(acc, y) {
+    return [y].concat(acc);
+  }, []);
 };
 
 var expose = function(env) {
@@ -957,7 +958,6 @@ var expose = function(env) {
       env[f] = Pointy[f];
     }
   }
-  return Pointy;
 }
 
 Pointy.id = id;
@@ -966,30 +966,30 @@ Pointy.fmap = fmap;
 Pointy.of = of;
 Pointy.ap = ap;
 Pointy.liftA2 = liftA2;
-Pointy.pure = pure;
+Pointy.liftA3 = liftA3;
 Pointy.chain = chain;
 Pointy.mbind = chain;
 Pointy.mjoin = mjoin;
 Pointy.empty = empty;
 Pointy.mempty = empty;
 Pointy.concat = concat;
-Pointy.mappend = concat;
+Pointy.mappend = mappend;
 Pointy.mconcat = mconcat;
+Pointy.sequenceA = sequenceA;
+Pointy.traverse = traverse;
+Pointy.foldMap = foldMap;
+Pointy.fold = fold;
+Pointy.toList = toList;
 Pointy.expose = expose;
 
 
 module.exports = Pointy;
 
-},{"./array":24,"./function":26,"./string":29,"lodash.curry":1}],29:[function(require,module,exports){
-var concat = function(xs,ys) { return xs.concat(ys); };
+if(typeof window == "object") {
+  PointFree = Pointy;
+}
 
-var empty = function() { return ""; };
-
-module.exports = { concat: concat
-                 , empty: empty
-                 }
-
-},{}],30:[function(require,module,exports){
+},{"./instances/array":24,"./instances/function":26,"./instances/string":28,"lodash.curry":2}],30:[function(require,module,exports){
 "use strict";
 
 var Constructor = function(f) {
@@ -1019,4 +1019,168 @@ var subClass = function(superclass, constructr) {
 }
 exports.subClass = subClass;
 
-},{}]},{},[23])
+var K = function(x){return function(){return x;};};
+exports.K = K;var I = function(x){return x;};
+exports.I = I;
+},{}],31:[function(require,module,exports){
+var Id = require('pointfree-fantasy/instances/identity')
+	, Identity = Id.Identity
+	, runIdentity = Id.runIdentity
+	, Constant = require('pointfree-fantasy/instances/const')
+	, Const = Constant.Const
+	, getConst = Constant.getConst
+	, Pf = require('pointfree-fantasy')
+	, compose = Pf.compose
+	, fmap = Pf.fmap
+	, curry = require('lodash.curry')
+	;
+
+/* The K Combinator: given x, return a function of one argument that will always return x.
+/* We will use this to define set in terms of over.
+*/
+//+ _K :: a -> (_ -> a)
+var _K = function(x) { return function(y) { return x; } }
+
+/* Deep-copy properties from source to destination, replacing any values found in identical paths,
+/* and leaving untouched any values found at paths that don't exist in the source object.
+/* This function mutates the destination object!
+*/
+	// stolen from http://stackoverflow.com/questions/11299284/javascript-deep-copying-object
+  , _merge = function(destination, source) {
+      for (var property in source) {
+        if (typeof source[property] === "object" && source[property] !== null && destination[property]) {
+          _merge(destination[property], source[property]);
+        } else {
+          destination[property] = source[property];
+        }
+      }
+      return destination;
+    }
+
+  , clone = function(obj) {
+      return _merge({}, obj);
+    }
+
+/* Return an array in which the key'th element of xs has been replaced by rep.
+*/
+//+ _arraySplice :: Int -> Object -> Array -> Array
+  , _arraySplice = function(key, rep, xs) {
+      var ys = xs.slice(0);
+      ys.splice(key, 1, rep);
+      return ys;
+    }
+
+/* Return a string in which the key'th character of str has been replaced by rep.
+/* (No check is done to ensure that rep is only a single character.)
+*/
+//+ _stringSplice :: Int -> String -> String -> String
+  , _stringSplice = function(key, rep, str) {
+  	  return str.substr(0,key) + rep + str.substr(key+1);
+		}
+
+/* Return an object in which the property indexed by key in obj has been replaced by rep.
+*/
+//+ _objectSplice :: String -> Object -> Object -> Object
+  , _objectSplice = function(key, rep, obj) {
+      var new_obj = clone(obj);
+      new_obj[key] = rep;
+      return new_obj;
+    }
+
+//+ arrayLens :: Int -> Lens
+  , arrayLens = function(key, f, xs) {
+			return fmap(function(rep) { return _arraySplice(key, rep, xs); }, f(xs[key]));
+  	}
+
+//+ stringLens :: Int -> Lens
+  , stringLens = function(key, f, xs) {
+			return fmap(function(rep) { return _stringSplice(key, rep, xs); }, f(xs[key]));
+  	}
+
+//+ objectLens :: String -> Lens
+  , objectLens = function(key, f, xs) {
+			return fmap(function(rep) { return _objectSplice(key, rep, xs); }, f(xs[key]));
+  	}
+
+//+ _intIndexedLens :: Int -> Lens
+	, _intIndexedLens = function(n) {
+			return curry(function(f, xs) {
+				return (typeof xs === 'string') ? stringLens(n, f, xs) : arrayLens(n, f, xs);
+			});
+		}
+
+//+ _stringIndexedLens :: String -> Lens
+	, _stringIndexedLens = function(key) {
+			return curry(function(f, x) {
+        return objectLens(key, f, x);
+			});
+		}
+
+  , _IntLenses = (function() {
+      var list = [];
+      for (var i = 0; i < 10; i++) {
+        list[i] = _intIndexedLens(i);
+      }
+      return list;
+    })()
+
+/* Return an object (suppose it's called obj) in which each property obj.key
+/* where "key" is a string from the passed-in array, or obj[key] where key is an integer,
+/* is a lens for that key.
+*/
+//+ makeLenses :: [String] -> {String: Lens}
+	, makeLenses = function(keys) {
+			return keys.reduce(function(acc, key) {
+				acc[key] = _stringIndexedLens(key);
+				return acc;
+			}, _IntLenses);
+		}
+
+//+ set :: (a -> Identity	b) -> s -> Identity t -> b -> s -> t
+	, set = curry(function(lens, val, x) {
+			return over(lens, _K(val), x);
+		})
+
+//+ view :: (a -> Const	r) -> s -> Const r -> s -> a
+	, view = curry(function(lens, x) {
+			return compose(getConst, lens(Const))(x);
+		})
+
+//+ over :: (a -> Identity b) -> s -> Identity t -> b -> s -> t
+	, over = curry(function(lens, f, x) {
+			return compose(runIdentity, lens(compose(Identity,f)))(x);
+		})
+
+//+ mapped :: (a -> Identity b) -> s -> Identity t
+	, mapped = curry(function(f, x) {
+		  return Identity(fmap(compose(runIdentity, f), x));
+		})
+	;
+
+var _Lenses = { makeLenses: makeLenses
+						  , set: set
+						  , view: view
+						  , over: over
+						  , mapped: mapped
+						  }
+
+_Lenses.expose = function(env) {
+  var f;
+  for (f in _Lenses) {
+    if (f !== 'expose' && _Lenses.hasOwnProperty(f)) {
+      env[f] = _Lenses[f];
+    }
+  }
+  return _Lenses;
+}
+
+module.exports = _Lenses;
+if(typeof window == "object") {
+	Lenses = _Lenses;
+}
+
+// next up folds and traverses...
+
+},{"lodash.curry":2,"pointfree-fantasy":29,"pointfree-fantasy/instances/const":25,"pointfree-fantasy/instances/identity":27}]},{},[1])
+return Lenses;
+});
