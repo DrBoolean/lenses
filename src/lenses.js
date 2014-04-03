@@ -93,7 +93,7 @@ var _K = function(x) { return function(y) { return x; } }
 
   , _IntLenses = (function() {
       var list = [];
-      for (var i = 0; i < 1000; i++) {
+      for (var i = 0; i < 10; i++) {
         list[i] = _intIndexedLens(i);
       }
       return list;
