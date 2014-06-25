@@ -1,40 +1,36 @@
-var Id = require('pointfree-fantasy/instances/identity')
-	, Identity = Id.Identity
-	, runIdentity = Id.runIdentity
+var Identity = require('fantasy-identities')
 	, Constant = require('pointfree-fantasy/instances/const')
 	, Const = Constant.Const
 	, getConst = Constant.getConst
 	, Pf = require('pointfree-fantasy')
 	, compose = Pf.compose
-	, fmap = Pf.fmap
-	, curry = require('lodash.curry')
+	, map = Pf.map
+	, traverse = Pf.traverse
+	, _ = require('lodash')
+  , curry = _.curry
+	, cloneDeep = _.cloneDeep
 	;
 
+/*
+* type Lens s t a b = ∀f. Functor f => (a -> f b) -> s -> f t
+* type Setter s t a b = (a -> Identity b) -> s -> Identity t
+* type Getting r s t a b = (a -> Const r b) -> s -> Const r t
+* type Getter s a = ∀r. (a -> Const r a) -> s -> Const r s
+* type Traversal s t a b = ∀f. Applicative f => (a -> f b) -> s -> f t
+* type Fold s a = ∀m. Monoid m => (a -> Const m a) -> s -> Const m s
+*/
+
 /* The K Combinator: given x, return a function of one argument that will always return x.
-/* We will use this to define set in terms of over.
+   We will use this to define set in terms of over.
 */
 //+ _K :: a -> (_ -> a)
 var _K = function(x) { return function(y) { return x; } }
 
-/* Deep-copy properties from source to destination, replacing any values found in identical paths,
-/* and leaving untouched any values found at paths that don't exist in the source object.
-/* This function mutates the destination object!
-*/
-	// stolen from http://stackoverflow.com/questions/11299284/javascript-deep-copying-object
-  , _merge = function(destination, source) {
-      for (var property in source) {
-        if (typeof source[property] === "object" && source[property] !== null && destination[property]) {
-          _merge(destination[property], source[property]);
-        } else {
-          destination[property] = source[property];
-        }
-      }
-      return destination;
-    }
 
-  , clone = function(obj) {
-      return _merge({}, obj);
-    }
+/* Extracts the value from the Id type
+*/
+//+ runIdentity :: Identity a -> a
+var runIdentity = function(i){ return i.x; }
 
 /* Return an array in which the key'th element of xs has been replaced by rep.
 */
@@ -45,90 +41,69 @@ var _K = function(x) { return function(y) { return x; } }
       return ys;
     }
 
-/* Return a string in which the key'th character of str has been replaced by rep.
-/* (No check is done to ensure that rep is only a single character.)
-*/
-//+ _stringSplice :: Int -> String -> String -> String
-  , _stringSplice = function(key, rep, str) {
-  	  return str.substr(0,key) + rep + str.substr(key+1);
-		}
-
 /* Return an object in which the property indexed by key in obj has been replaced by rep.
 */
 //+ _objectSplice :: String -> Object -> Object -> Object
   , _objectSplice = function(key, rep, obj) {
-      var new_obj = clone(obj);
+      var new_obj = cloneDeep(obj);
       new_obj[key] = rep;
       return new_obj;
     }
 
-//+ arrayLens :: Int -> Lens
-  , arrayLens = function(key, f, xs) {
-			return fmap(function(rep) { return _arraySplice(key, rep, xs); }, f(xs[key]));
-  	}
+/* Creates a lens for the n'th index in the array
+*/
+//+ arrayLens :: Int -> (a -> f b) -> [a] -> [b]    || Int -> Lens [a] b a b
+  , arrayLens = curry(function(key, f, xs) {
+			return map(function(rep) { return _arraySplice(key, rep, xs); }, f(xs[key]));
+  	})
 
-//+ stringLens :: Int -> Lens
-  , stringLens = function(key, f, xs) {
-			return fmap(function(rep) { return _stringSplice(key, rep, xs); }, f(xs[key]));
-  	}
-
-//+ objectLens :: String -> Lens
-  , objectLens = function(key, f, xs) {
-			return fmap(function(rep) { return _objectSplice(key, rep, xs); }, f(xs[key]));
-  	}
-
-//+ _intIndexedLens :: Int -> Lens
-	, _intIndexedLens = function(n) {
-			return curry(function(f, xs) {
-				return (typeof xs === 'string') ? stringLens(n, f, xs) : arrayLens(n, f, xs);
-			});
-		}
-
-//+ _stringIndexedLens :: String -> Lens
-	, _stringIndexedLens = function(key) {
-			return curry(function(f, x) {
-        return objectLens(key, f, x);
-			});
-		}
-
-  , _IntLenses = (function() {
-      var list = [];
-      for (var i = 0; i < 10; i++) {
-        list[i] = _intIndexedLens(i);
-      }
-      return list;
-    })()
+/* Creates a lens for a specified key in an object
+*/
+//+ objectLens :: String -> (a -> b) -> {String: a} -> Lens
+  , objectLens = curry(function(key, f, xs) {
+			return map(function(rep) { return _objectSplice(key, rep, xs); }, f(xs[key]));
+  	})
 
 /* Return an object (suppose it's called obj) in which each property obj.key
-/* where "key" is a string from the passed-in array, or obj[key] where key is an integer,
-/* is a lens for that key.
+/* where "key" is a string from the passed-in array
 */
 //+ makeLenses :: [String] -> {String: Lens}
 	, makeLenses = function(keys) {
 			return keys.reduce(function(acc, key) {
-				acc[key] = _stringIndexedLens(key);
+				acc[key] = objectLens(key);
 				return acc;
-			}, _IntLenses);
+			}, { num : arrayLens });
 		}
 
-//+ set :: (a -> Identity	b) -> s -> Identity t -> b -> s -> t
+//+ set :: Setter s t a b -> b -> s -> t
 	, set = curry(function(lens, val, x) {
 			return over(lens, _K(val), x);
 		})
 
-//+ view :: (a -> Const	r) -> s -> Const r -> s -> a
+//+ view :: Getting a s t a b -> s -> a
 	, view = curry(function(lens, x) {
 			return compose(getConst, lens(Const))(x);
 		})
 
-//+ over :: (a -> Identity b) -> s -> Identity t -> b -> s -> t
+//+ over :: Setter s t a b -> (a -> b) -> s -> t
 	, over = curry(function(lens, f, x) {
 			return compose(runIdentity, lens(compose(Identity,f)))(x);
 		})
 
-//+ mapped :: (a -> Identity b) -> s -> Identity t
+/*
+ * map, but as a lens. Squinting at the setter you can see the parts to construct map's signature
+ * over(mapped) == map :: Functor f => (a -> b) -> f a -> f b
+ *
+ * This can compose with other lenses so, for example, you can do something like this:
+ * 
+ * var L = makeLenses(['name'])
+ * var user = {name: Some("bob")}
+ * var mapped_name = compose(L.name, mapped) // remember lenses compose left to right
+ * over(L.name, toUpperCase, user) // {name: Some("BOB")}
+ */
+//+ mapped :: Functor f => Setter (f a) (f b) a b
 	, mapped = curry(function(f, x) {
-		  return Identity(fmap(compose(runIdentity, f), x));
+		  return Identity(map(compose(runIdentity, f), x));
 		})
 	;
 

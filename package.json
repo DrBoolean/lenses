@@ -1,6 +1,6 @@
 {
   "name": "lenses",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Kmett style lenses in js.",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "pointfree-fantasy": "*",
-    "lodash.curry": "*"
+    "fantasy-identities": "*",
+    "lodash": "*"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
