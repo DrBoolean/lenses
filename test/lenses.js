@@ -52,9 +52,15 @@ describe('Lenses', function() {
 		})
 	});
 
-	it('maps like map', function() {
+	it('mapped composes and works as a map lens', function() {
 		var f = over(compose(mapped, mapped, mapped), add(1))
 		assert.deepEqual(f([[[2]]]), [[[3]]])
 	});
 	
+	it('traverses like traverse', function() {
+    var trav_fn = function(x) { return Identity(add(1, x)) }
+    var of = Identity.of;
+		var f = over(compose(traversed(of), traversed(of), traversed(of)), trav_fn)
+		assert.deepEqual(f([[[2]]]), Identity([[[3]]]))
+	});
 });

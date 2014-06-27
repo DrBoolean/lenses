@@ -105,6 +105,11 @@ var runIdentity = function(i){ return i.x; }
 	, mapped = curry(function(f, x) {
 		  return Identity(map(compose(runIdentity, f), x));
 		})
+
+//+ traversed :: Functor f => (a -> f a) -> Setter (f a) (f b) a b
+	, traversed = curry(function(point, f, x) {
+		  return Identity(traverse(compose(runIdentity, f), point, x));
+		})
 	;
 
 var _Lenses = { makeLenses: makeLenses
@@ -112,6 +117,7 @@ var _Lenses = { makeLenses: makeLenses
 						  , view: view
 						  , over: over
 						  , mapped: mapped
+						  , traversed: traversed
 						  }
 
 _Lenses.expose = function(env) {
