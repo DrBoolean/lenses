@@ -6,7 +6,7 @@ Functional lenses that compose and stuff
 
 ```js
 require('./src/lenses').expose(global);
-var compose = require('./src/lib/pointfree').compose;
+var compose = require('pointfree-fantasy').compose;
 
 // setup an easy test fn
 var toUpperCase = function(x) { return x.toUpperCase(); };
@@ -31,8 +31,6 @@ set(L.name, 'Kelly', user) // {name: "Kelly", addresses: [{street: '99 Maple', z
 
 ROADMAP:
 
-- remove dependency on identity and const from pointfree and use fantasy ones
-- update the browser file for amd as well
 - add traverses and folds
 - more combinators
 - prisms
