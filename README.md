@@ -28,6 +28,7 @@ view(L.name, user) // 'Bob'
 set(L.name, 'Kelly', user) // {name: "Kelly", addresses: [{street: '99 Maple', zip: 94004, type: 'home'}, {street: '2302 Powell', zip: 94001, type: 'work'}]}
 ```
 
+For those not already familiar with lenses, a brief introduction can be found [here](https://vimeo.com/104807358)
 
 ROADMAP:
 
